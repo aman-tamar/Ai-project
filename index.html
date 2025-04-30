@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroScan | Brain Tumor Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1>NeuroScan</h1>
+            </div>
+            <p class="tagline">Advanced MRI Analysis for Brain Tumor Detection</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="upload-section">
+                <div class="card">
+                    <h2><i class="fas fa-upload"></i> Upload MRI Scan</h2>
+                    <p class="instruction">Please upload a brain MRI scan for analysis</p>
+                    
+                    <form method="post" enctype="multipart/form-data" class="upload-form">
+                        <div class="file-upload-wrapper">
+                            <input type="file" name="file" id="file" class="file-upload" accept=".png,.jpg,.jpeg" required>
+                            <label for="file" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Choose a file</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="analyze-btn">
+                            <i class="fas fa-search"></i> Analyze Scan
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            {% if filename or error %}
+            <section class="results-section">
+                <div class="card result-card">
+                    <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                    
+                    {% if error %}
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>{{ error }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if filename %}
+                    <div class="result-content">
+                        <div class="image-preview">
+                            <img src="{{ url_for('static', filename='images/' + filename) }}" 
+                                 alt="Uploaded MRI Scan" class="scan-image">
+                            <div class="image-overlay">MRI Scan Preview</div>
+                        </div>
+
+                        <div class="prediction-details">
+                            <div class="result-item">
+                                <h3>Prediction:</h3>
+                                <div class="prediction-badge {{ prediction.lower().replace(' ', '-') }}">
+                                    {{ prediction }}
+                                </div>
+                            </div>
+
+                            <div class="result-item">
+                                <h3>Confidence:</h3>
+                                <div class="confidence-meter">
+                                    <div class="meter-bar" style="width: {{ confidence }}%"></div>
+                                    <span>{{ confidence }}%</span>
+                                </div>
+                            </div>
+
+                            <div class="result-item">
+                                <h3>Interpretation:</h3>
+                                <ul class="interpretation-list">
+                                    <li><strong>Glioma:</strong> A type of tumor that occurs in the brain or spinal cord.</li>
+                                    <li><strong>Meningioma:</strong> A tumor that arises from the meninges, the membranes that surround the brain and spinal cord.</li>
+                                    <li><strong>No Tumor:</strong> No detectable signs of a brain tumor.</li>
+                                    <li><strong>Pituitary:</strong> A tumor in the pituitary gland that can affect hormone production.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+            {% endif %}
+        </main>
+
+        <!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2025 NeuroScan AI | For research purposes only</p>
+    <div class="footer-links">
+        <a href="/about-model"><i class="fas fa-microscope"></i> About Model</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+    </div>
+</footer>
+    </div>
+
+    <script>
+        // Display filename when file is selected
+        document.getElementById('file').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file selected';
+            document.querySelector('.file-upload-label span').textContent = fileName;
+        });
+    </script>
+</body>
+</html>

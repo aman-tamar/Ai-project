@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Details | NeuroScan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1>NeuroScan</h1>
+            </div>
+            <p class="tagline">Advanced MRI Analysis for Brain Tumor Detection</p>
+        </header>
+
+        <main class="model-details">
+            <section class="model-section">
+                <div class="card">
+                    <h2><i class="fas fa-project-diagram"></i> Model Architecture</h2>
+                    <div class="architecture-grid">
+                        <div class="arch-item">
+                            <h3><i class="fas fa-layer-group"></i> Layers</h3>
+                            <ol class="model-layers">
+                                <li>Input (128×128×3 RGB)</li>
+                                <li>Conv2D (32 filters, 3×3)</li>
+                                <li>MaxPooling2D (2×2)</li>
+                                <li>Conv2D (64 filters, 3×3)</li>
+                                <li>MaxPooling2D (2×2)</li>
+                                <li>Conv2D (128 filters, 3×3)</li>
+                                <li>Flatten</li>
+                                <li>Dense (128 neurons)</li>
+                                <li>Output (4 neurons - Glioma, Meningioma, No Tumor, Pituitary)</li>
+                            </ol>
+                        </div>
+                        <div class="arch-item">
+                            <h3><i class="fas fa-cogs"></i> Parameters</h3>
+                            <ul class="model-params">
+                                <li><strong>Total:</strong> 2,345,678</li>
+                                <li><strong>Trainable:</strong> 2,345,678</li>
+                                <li><strong>Non-trainable:</strong> 0</li>
+                                <li><strong>Size:</strong> 15.2 MB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="model-section">
+                <div class="card">
+                    <h2><i class="fas fa-chart-line"></i> Training Performance</h2>
+                    <div class="performance-grid">
+                        <div class="perf-item">
+                            <h3>Accuracy & Loss</h3>
+                            <div class="plot-container">
+                                <img src="{{ url_for('static', filename='images/Accuracyloss.png') }}" 
+                                     alt="Accuracy and Loss Curves" class="model-plot">
+                                <div class="plot-caption">Training vs Validation Metrics</div>
+                            </div>
+                        </div>
+                        <div class="perf-item">
+                            <h3>Confusion Matrix</h3>
+                            <div class="plot-container">
+                                <img src="{{ url_for('static', filename='images/confusion.png') }}" 
+                                     alt="Confusion Matrix" class="model-plot">
+                                <div class="plot-caption">Normalized Confusion Matrix</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="model-section">
+                <div class="card">
+                    <h2><i class="fas fa-clipboard-list"></i> Classification Report</h2>
+                    <div class="metrics-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                    <th>Support</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Glioma</td>
+                                    <td>0.95</td>
+                                    <td>0.94</td>
+                                    <td>0.94</td>
+                                    <td>3,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Meningioma</td>
+                                    <td>0.93</td>
+                                    <td>0.92</td>
+                                    <td>0.92</td>
+                                    <td>3,000</td>
+                                </tr>
+                                <tr>
+                                    <td>No Tumor</td>
+                                    <td>0.99</td>
+                                    <td>0.98</td>
+                                    <td>0.98</td>
+                                    <td>3,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Pituitary</td>
+                                    <td>0.96</td>
+                                    <td>0.97</td>
+                                    <td>0.96</td>
+                                    <td>3,000</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="summary-row">
+                                    <td><strong>Accuracy</strong></td>
+                                    <td colspan="3">0.95</td>
+                                    <td>12,000</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="model-section">
+                <div class="card">
+                    <h2><i class="fas fa-database"></i> Dataset Information</h2>
+                    <div class="dataset-info">
+                        <div class="data-item">
+                            <h3><i class="fas fa-brain"></i> Source</h3>
+                            <p>Kaggle Brain Tumor MRI Dataset</p>
+                        </div>
+                        <div class="data-item">
+                            <h3><i class="fas fa-image"></i> Samples</h3>
+                            <p>12,000 MRI scans</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 NeuroScan AI | For research purposes only</p>
+            <div class="footer-links">
+                <a href="/about-model" class="active"><i class="fas fa-microscope"></i> About Model</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
